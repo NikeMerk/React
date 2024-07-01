@@ -1,0 +1,124 @@
+html {
+	box-sizing: border-box;
+}
+
+*, *::before, *::after {
+	box-sizing: inherit;
+}
+
+body {
+	background-color: rgb(153, 97, 255);
+}
+
+ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+h1, h2, h3, h4, h5, p {
+	padding: 0;
+	margin: 0;
+	display: inline-block;
+}
+
+.question-app {
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	width: 400px;
+	min-height: 250px;
+	border: 1px solid #33333339;
+	border-radius: 20px;
+} 
+
+.progress-bar {
+	height: 8px;
+	width: 100%;
+	background-color: #3333331e;
+	border-radius: 10px;
+	margin-bottom: 20px;
+}
+.progress-bar__line {
+	width: 0px;
+	height: 100%;
+	background: linear-gradient(45deg, rgb(207, 154, 154), rgb(119, 82, 182));
+	border-radius: inherit;
+	transition: width .2s ease-in-out;
+}
+
+.question-title {
+	align-self: center;
+	margin-bottom: 20px;
+}
+
+.question__item {
+	padding: 10px;
+	border: 1px solid #33333339;
+	border-radius: 10px;
+	transition: transform .1s ease-in-out;
+	cursor: pointer;
+	color: #333333c9;
+}
+.question__item:not(:last-child) {
+	margin-bottom: 10px;
+}
+.question__item:hover {
+	transform: scale(1.02);
+}
+.question__item:active {
+	transform: scale(1);
+}
+
+.container {
+	width: 400px;
+	margin: 0 auto;
+}
+
+.result {
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	width: 400px;
+	min-height: 250px;
+	border: 1px solid #33333339;
+	border-radius: 20px;
+}
+
+.image__block {
+	width: 110px;
+	height: 110px;
+	background-image: url(/free-sticker-new-year-6294952.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+	margin-bottom: 20px;
+}
+
+.result {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.result__title {
+	margin-bottom: 20px;
+}
+
+.result__button {
+	padding: 10px 30px;
+	border: none;
+	background-color: tomato;
+	border-radius: 10px;
+	color: white;
+	cursor: pointer;
+	transition: transform  .1s ease-in-out;
+}
+.result__button:hover {
+	transform: scale(1.1);
+}
+.result__button:active {
+	transform: scale(1);
+}
+

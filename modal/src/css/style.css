@@ -1,0 +1,110 @@
+html {
+	box-sizing: border-box;
+	background-color: #333;
+	color: white;
+}
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+
+h1, h2, h3, h4, h5, h6, p, span {
+	padding: 0;
+	margin: 0;
+}
+
+.root {
+	position: relative;
+}
+
+.container {
+	padding-top: 100px;
+	margin: 0 auto;
+	width: 150px;
+}
+
+.open-modal {
+	border: none;
+	padding: 13px 20px;
+	border-radius: 20px;
+	background-color: tomato;
+	color: white;
+	cursor: pointer;
+	transition: transform 0.1s linear;
+}
+
+.modal {
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.333);
+	padding: 10px;
+	display: flex; 
+	flex-direction: column;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity .2s ease-in-out;
+}
+
+.show-modal {
+	visibility:visible;
+	opacity: 1;
+}
+
+.modal-content {
+	position: absolute;
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 10px;
+	border: 1px solid white;
+	width: 300px; 
+	height: 100px;
+}
+
+.modal__title {
+	align-self: center;
+}
+
+.modal__block-button {
+	align-self: end;
+}
+
+.btn {
+	cursor: pointer;
+	border: none;
+	border-radius: 2px;
+	padding: 5px 10px;
+	transition: transform .1s ease-in-out;
+}
+.btn:hover{
+	transform: scale(1.1);
+}
+.btn:active{
+	transform: scale(1);
+}
+
+.open-modal:hover{
+	transform: scale(1.1);
+}
+.open-modal:active{
+	transform: scale(1);
+}
+
+.modal__button-done {
+	background-color: rgba(0, 255, 0, 0.767);
+	margin-right: 10px;
+	color: white;
+}
+
+.modal__button-exit {
+	background-color: rgba(255, 0, 0, 0.767);
+	color: white;
+}

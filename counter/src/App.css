@@ -1,0 +1,57 @@
+body {
+	background-color: #333;
+	color: white;
+}
+
+.root {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+h1, h2, h3, h4, h5 {
+	margin: 0;
+	padding: 0;
+}
+
+.container {
+	margin: 0 auto;
+	width: 300px;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+.button:first-child {
+	margin-right: 10px;
+}
+
+.title-counter {
+	margin-bottom: 10px;
+}
+
+.count {
+	margin-bottom: 10px;
+	font-size: 30px;
+}
+
+.button {
+	border: 1px solid white;
+	background-color: transparent;
+	padding: 7px 10px;
+	color: white;
+	border-radius: 9px;
+	cursor: pointer;
+	transition: transform .1s ease-in-out;
+}
+.button:hover {
+	transform: scale(1.1);
+}
+.button:active {
+	transform: scale(1);
+}
+.btn-dec {
+	background-color: rgba(245, 6, 6, 0.663);
+}
+.btn-inc {
+	background-color: rgba(22, 245, 6, 0.663);
+}
