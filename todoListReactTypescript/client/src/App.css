@@ -1,0 +1,24 @@
+body {
+  background: rgb(13, 7, 20);
+}
+.container {
+  padding: 30px;
+  width: 583px;
+  border-radius: 20px;
+  margin: 0 auto;
+  background: rgb(29, 24, 37);
+}
+.app {
+  padding: 10px;
+  width: 432px;
+  margin: 0 auto;
+
+  border-radius: 10px;
+}
+
+.icon-loading {
+  display: block;
+  margin: 0 auto;
+}
+
+
