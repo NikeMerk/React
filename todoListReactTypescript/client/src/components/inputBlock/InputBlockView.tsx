@@ -1,19 +1,28 @@
-import {FC, useEffect, useRef, useState} from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import "./inputBlock.css";
-import {downloadPost} from "../../api/api";
-import {usePostList} from "../../hooks/usePostLIst";
-import {eventBus} from "../../App";
+import { downloadPost } from "../../api/api";
+import { eventBus } from "../../App";
+import { IPost } from "../../types/types";
 
-export const InputBlockView: FC = () => {
+interface InputViewProps {
+  owner: string;
+  stateStorApp: boolean;
+}
 
+export const InputBlockView: FC<InputViewProps> = ({ owner, stateStorApp }) => {
   const [inputValue, setInputValue] = useState("");
-  const {reload} = usePostList()
 
-  let inputFocus = useRef(null)
+  let inputFocus = useRef(null);
+  let arrayObjectsLocalData: Array<object>;
+  if (JSON.parse(localStorage.getItem(owner)) === null) {
+    arrayObjectsLocalData = [];
+  } else {
+    arrayObjectsLocalData = JSON.parse(localStorage.getItem(owner));
+  }
 
   useEffect(() => {
     inputFocus.current.focus();
-  }, [inputFocus])
+  }, [inputFocus]);
 
   return (
     <div className="inner-block">
@@ -25,20 +34,42 @@ export const InputBlockView: FC = () => {
         }}
         value={inputValue}
       />
-      <button className="button-post" onClick={()  => {
-        // @ts-ignore
-        new Promise(async (resolve) => {
-           await downloadPost({
-              name: inputValue,
-              owner: "my todo",
-              done: false,
-          })
-          setInputValue("")
-          eventBus.emit("reload list")
-          resolve()
-        })
-
-      }}>+</button>
+      <button
+        className="button-post"
+        onClick={() => {
+          if (stateStorApp) {
+            // @ts-ignore
+            new Promise(async (resolve) => {
+              await downloadPost({
+                name: inputValue,
+                owner: owner,
+                done: false,
+              });
+              setInputValue("");
+              eventBus.emit("reload list");
+              resolve();
+            });
+          } else {
+            if (inputValue !== "") {
+              const obj: IPost = {
+                name: inputValue,
+                owner: owner,
+                done: false,
+                id: crypto.randomUUID(),
+              };
+              setInputValue("");
+              arrayObjectsLocalData.push(obj);
+              localStorage.setItem(
+                owner,
+                JSON.stringify(arrayObjectsLocalData),
+              );
+              eventBus.emit("reload local list vew");
+            }
+          }
+        }}
+      >
+        +
+      </button>
     </div>
   );
 };

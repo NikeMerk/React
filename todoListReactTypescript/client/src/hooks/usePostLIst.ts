@@ -10,7 +10,6 @@ export const usePostList = () => {
   const [listData, setListData] = useState([])
 
   useEffect(() => {
-    console.log("down list data")
     getListData().then((data) => {
       setPostListState({ status: "done", data: data });
     });

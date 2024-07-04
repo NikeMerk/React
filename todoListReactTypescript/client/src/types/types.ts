@@ -2,19 +2,29 @@ export interface IPost {
   name: string;
   owner: string;
   done: boolean;
-  id?: string;
+  id?: string | number;
 }
+
 export type PostListData = IPost[];
 
 export interface IPostList {
+  ownerData: string;
   list: IPost[];
+  stateStor: boolean;
 }
+
 export interface IPostProps {
   post: IPost;
+  stateStorApp?: boolean;
+  localArray?: IPost[];
+  setLocalArray?: any;
+  ownerData?: string;
 }
+
 export interface ILoadingState {
   status: "loading";
 }
+
 export interface IDoneState {
   status: "done";
   data: PostListData;

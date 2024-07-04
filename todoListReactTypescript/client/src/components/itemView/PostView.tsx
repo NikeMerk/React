@@ -1,26 +1,45 @@
-import {FC} from "react";
-import {IPostProps} from "../../types/types";
+import { FC } from "react";
+import { IPostProps } from "../../types/types";
 import "./post.css";
-import {changePost, deletePost} from "../../api/api";
-import {eventBus} from "../../App";
+import { changePost, deletePost } from "../../api/api";
+import { eventBus } from "../../App";
 
-export const PostView: FC<IPostProps> = (post) => {
-  console.log("start post view")
+export const PostView: FC<IPostProps> = ({
+  post,
+  stateStorApp,
+  localArray,
+  setLocalArray,
+  ownerData,
+}) => {
   return (
-    <li className={post.post.done === false ? "list__item" :"list__item list__item-done"}>
+    <li
+      className={
+        post.done === false ? "list__item" : "list__item list__item-done"
+      }
+    >
       <div className="list__item-blok-text">
-        <p className="list__item-text">{post.post.name}</p>
+        <p className="list__item-text">{post.name}</p>
       </div>
       <div className="list__item-blok-buttons">
         <button
           className="list__item-btn-done"
           onClick={() => {
-            // @ts-ignore
-            new Promise(async (resolve) => {
-              await changePost(!post.post.done, post.post.id);
-              eventBus.emit("change post")
-              resolve()
-            })
+            if (stateStorApp) {
+              // @ts-ignore
+              new Promise(async (resolve) => {
+                await changePost(!post.done, post.id);
+                eventBus.emit("change post");
+                resolve();
+              });
+            } else {
+              localArray.map((obj) => {
+                if (obj.id === post.id) {
+                  obj.done = !obj.done;
+                  localStorage.setItem(ownerData, JSON.stringify(localArray));
+                  eventBus.emit("reload local list vew");
+                }
+              });
+            }
           }}
         >
           <svg
@@ -44,13 +63,18 @@ export const PostView: FC<IPostProps> = (post) => {
         <button
           className="list__item-btn-delete"
           onClick={() => {
-            // @ts-ignore
-            new Promise( async (resolve) => {
-              await deletePost(post.post.id);
-              eventBus.emit("delete post")
-              resolve()
-            })
-
+            if (stateStorApp) {
+              // @ts-ignore
+              new Promise(async (resolve) => {
+                await deletePost(post.id);
+                eventBus.emit("delete post");
+                resolve();
+              });
+            } else {
+              localArray = localArray.filter((obj) => obj.id !== post.id);
+              localStorage.setItem(ownerData, JSON.stringify(localArray));
+              setLocalArray(localArray);
+            }
           }}
         >
           <svg

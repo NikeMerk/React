@@ -1,4 +1,4 @@
-import {IPost, PostListData} from "../types/types";
+import { IPost, PostListData } from "../types/types";
 
 const URL = "http://localhost:3000/api/todos/";
 
@@ -10,16 +10,15 @@ export const getListData = (): Promise<PostListData> => {
     });
 };
 
-export const downloadPost = (post: IPost):Promise<any> => {
-  console.log("down")
+export const downloadPost = (post: IPost): Promise<any> => {
   return fetch(URL, {
     method: "POST",
     body: JSON.stringify(post),
     headers: { "content-type": "application/json" },
-  })
-}
+  });
+};
 
-export const changePost = async (change: boolean, id: string) => {
+export const changePost = async (change: boolean, id: string | number) => {
   return await fetch(URL + id, {
     method: "PATCH",
     body: JSON.stringify({ done: change }),
@@ -27,6 +26,6 @@ export const changePost = async (change: boolean, id: string) => {
   });
 };
 
-export const deletePost = async (id: string) => {
+export const deletePost = async (id: string | number) => {
   return await fetch(URL + id, { method: "DELETE" });
 };
