@@ -22,7 +22,7 @@ export const App = () => {
         ) : (
           <span className={"offline"}>now : offline</span>
         )}
-        <LinksVew stateApp={owner} setStateApp={setOwner} />
+        <LinksVew setStateApp={setOwner} />
         <ButtonStorageVew
           stateStorApp={stateStor}
           setStateStorApp={setStateStor}

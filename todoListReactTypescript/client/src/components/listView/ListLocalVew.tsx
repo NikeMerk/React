@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { PostView } from "../itemView/PostView";
 import { IPost } from "../../types/types";
 import { eventBus } from "../../App";
@@ -15,41 +15,36 @@ export const ListLocalVew: FC<ILIstLocalVewProps> = ({
   let countNotDone: number = 0;
   let countDone: number = 0;
 
+  const downLocalDataArray = JSON.parse(localStorage.getItem(ownerData));
   const [localArray, setLocalArray] = useState(
     JSON.parse(localStorage.getItem(ownerData)),
   );
 
   function reloadLocalList() {
     setLocalArray(JSON.parse(localStorage.getItem(ownerData)));
+    eventBus.detach("reload local list vew", reloadLocalList);
   }
 
-  useEffect(() => {
-    eventBus.on("reload local list vew", reloadLocalList);
-    return () => {
-      eventBus.detach("reload local list vew", reloadLocalList);
-    };
-  });
+  eventBus.on("reload local list vew", reloadLocalList);
 
   if (localArray !== null) {
     return (
       <>
         <div className="block-list">
           <ul className="list">
-            {localArray.map((obj: IPost) => {
-              if (obj.owner === ownerData) {
-                if (obj.done === false) {
-                  countNotDone++;
-                  return (
-                    <PostView
-                      ownerData={ownerData}
-                      localArray={localArray}
-                      setLocalArray={setLocalArray}
-                      stateStorApp={stateStor}
-                      key={obj.id}
-                      post={obj}
-                    />
-                  );
-                }
+            {downLocalDataArray.map((obj: IPost) => {
+              if (obj.done === false) {
+                countNotDone++;
+                return (
+                  <PostView
+                    ownerData={ownerData}
+                    localArray={downLocalDataArray}
+                    setLocalArray={setLocalArray}
+                    stateStorApp={stateStor}
+                    key={obj.id}
+                    post={obj}
+                  />
+                );
               }
             })}
           </ul>
@@ -58,21 +53,19 @@ export const ListLocalVew: FC<ILIstLocalVewProps> = ({
           ) : undefined}
         </div>
         <div className="block-done">
-          {localArray.map((obj: IPost) => {
-            if (obj.owner === ownerData) {
-              if (obj.done) {
-                countDone++;
-                return (
-                  <PostView
-                    ownerData={ownerData}
-                    localArray={localArray}
-                    setLocalArray={setLocalArray}
-                    stateStorApp={stateStor}
-                    key={obj.id}
-                    post={obj}
-                  />
-                );
-              }
+          {downLocalDataArray.map((obj: IPost) => {
+            if (obj.done) {
+              countDone++;
+              return (
+                <PostView
+                  ownerData={ownerData}
+                  localArray={downLocalDataArray}
+                  setLocalArray={setLocalArray}
+                  stateStorApp={stateStor}
+                  key={obj.id}
+                  post={obj}
+                />
+              );
             }
           })}
           {countDone !== 0 ? (
