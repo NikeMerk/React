@@ -1,0 +1,8 @@
+.active {
+  color: white;
+  cursor: pointer;
+}
+.header {
+  position: absolute;
+  top: 0;
+}

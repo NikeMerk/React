@@ -1,0 +1,48 @@
+.list__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px;
+  border-radius: 10px;
+  background: rgb(21, 16, 28);
+  color: rgb(158, 120, 207);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+  text-align: left;
+}
+
+.list__item-done {
+  text-decoration: line-through;
+  color: rgb(120, 207, 176);
+}
+
+
+.list__item:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.list__item-text {
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+}
+
+.list__item-btn-done {
+  margin-right: 17px;
+}
+
+.list__item-btn-done,
+.list__item-btn-delete {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.list__item-btn-done:hover,
+.list__item-btn-delete:hover {
+  transform: scale(1.2);
+}
